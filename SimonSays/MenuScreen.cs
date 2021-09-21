@@ -18,13 +18,19 @@ namespace SimonSays
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            //TODO: remove this screen and start the GameScreen
+            //remove this screen and start the GameScreen
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+
+            GameScreen gs = new GameScreen();
+            f.Controls.Add(gs);
         }
 
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            //TODO: end the application
+            //end the application
+            Application.Exit();
         }
     }
 }

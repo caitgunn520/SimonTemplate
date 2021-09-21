@@ -14,8 +14,10 @@ namespace SimonSays
 {
     public partial class GameScreen : UserControl
     {
-        //TODO: create guess variable to track what part of the pattern the user is at
+        //create guess variable to track what part of the pattern the user is at
+        int guess;
 
+        Random randGen = new Random();
 
         public GameScreen()
         {
@@ -24,14 +26,50 @@ namespace SimonSays
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            //TODO: clear the pattern list from form1, refresh, pause for a bit, and run ComputerTurn()
+            //clear the pattern list from form1, refresh, pause for a bit, and run ComputerTurn()
+            Form1.patternList.Clear();
+            this.Refresh();
+            Thread.Sleep(500);
+            ComputerTurn();
         }
 
         private void ComputerTurn()
         {
-            //TODO: get rand num between 0 and 4 (0, 1, 2, 3) and add to pattern list
+            //get rand num between 0 and 4 (0, 1, 2, 3) and add to pattern list
+            int randNum = randGen.Next(0, 4);
+            Form1.patternList.Add(randNum);
 
-            //TODO: create a for loop that shows each value in the pattern by lighting up approriate button
+            //create a for loop that shows each value in the pattern by lighting up appropriate button
+            for (int i = 0; i < Form1.patternList.Count(); i++)
+            {
+                switch (Form1.patternList[i])
+                {
+                    case 0:
+                        greenButton.BackColor = Color.GreenYellow;
+                        Refresh();
+                        Thread.Sleep(500);
+                        greenButton.BackColor = Color.ForestGreen;
+                        break;
+                    case 1:
+                        redButton.BackColor = Color.Red;
+                        Refresh();
+                        Thread.Sleep(500);
+                        redButton.BackColor = Color.DarkRed;
+                        break;
+                    case 2:
+                        blueButton.BackColor = Color.Blue;
+                        Refresh();
+                        Thread.Sleep(500);
+                        blueButton.BackColor = Color.DarkBlue;
+                        break;
+                    default:
+                        yellowButton.BackColor = Color.Yellow;
+                        Refresh();
+                        Thread.Sleep(500);
+                        yellowButton.BackColor = Color.Goldenrod;
+                        break;
+                }
+            }
 
             //TODO: get guess index value back to 0
         }
